@@ -1,0 +1,50 @@
+{
+  "name": "file-management",
+  "version": "1.0.0",
+  "description": "Một trang web tải file với giao diện đẹp, hiện đại và hỗ trợ SEO được thiết kế để cung cấp các ứng dụng và tiện ích cho nhiều nền tảng khác nhau.",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=3000 --open=/",
+    "dev": "live-server --port=3000 --open=/",
+    "build": "echo 'Build completed'",
+    "test": "echo 'No tests specified'",
+    "lint": "echo 'No linting configured'",
+    "deploy": "echo 'Deploy to production'"
+  },
+  "keywords": [
+    "file-download",
+    "web-app",
+    "admin-panel",
+    "file-management",
+    "download-center",
+    "seo-friendly",
+    "responsive-design",
+    "php",
+    "javascript",
+    "html5",
+    "css3"
+  ],
+  "author": "AZZ-vopp",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AZZ-vopp/file_management.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AZZ-vopp/file_management/issues"
+  },
+  "homepage": "https://github.com/AZZ-vopp/file_management#readme",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "dependencies": {},
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+} 

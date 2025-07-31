@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trang quản trị - Quản lý và tải file lên hệ thống">
+    <meta name="keywords" content="admin, quản lý file, tải file lên, dashboard">
+    <meta name="author" content="File Download Center">
+    <title>Admin Dashboard - Quản Lý File</title>
+    <link rel="stylesheet" href="admin-style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <img src="images/logo-white.png" alt="Admin Panel" class="logo-img">
+                    <h2>Admin Panel</h2>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#files" class="nav-item" data-section="files">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Quản Lý File</span>
+                </a>
+                <a href="#upload" class="nav-item" data-section="upload">
+                    <i class="fas fa-upload"></i>
+                    <span>Tải File Lên</span>
+                </a>
+                <a href="#categories" class="nav-item" data-section="categories">
+                    <i class="fas fa-folder"></i>
+                    <span>Danh Mục</span>
+                </a>
+                <a href="#settings" class="nav-item" data-section="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Cài Đặt</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <button class="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 id="page-title">Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Tìm kiếm..." id="search-input">
+                    </div>
+                    <div class="user-menu">
+                        <span>Admin</span>
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="total-files">0</h3>
+                            <p>Tổng File</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="total-downloads">0</h3>
+                            <p>Tổng Tải Xuống</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="total-categories">0</h3>
+                            <p>Danh Mục</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="avg-downloads">0</h3>
+                            <p>TB Tải/File</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="recent-uploads">
+                        <h3>File Tải Lên Gần Đây</h3>
+                        <div class="file-list" id="recent-files">
+                            <!-- Files will be loaded here -->
+                        </div>
+                    </div>
+                    <div class="category-stats">
+                        <h3>Thống Kê Theo Danh Mục</h3>
+                        <div class="category-list" id="category-stats">
+                            <!-- Category stats will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Files Section -->
+            <section id="files" class="section">
+                <div class="section-header">
+                    <h2>Quản Lý File</h2>
+                    <button class="btn btn-primary" onclick="showUploadModal()">
+                        <i class="fas fa-plus"></i> Thêm File
+                    </button>
+                </div>
+                
+                <div class="filters">
+                    <select id="category-filter" class="filter-select">
+                        <option value="">Tất cả danh mục</option>
+                    </select>
+                    <input type="text" id="search-files" placeholder="Tìm kiếm file..." class="filter-input">
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Icon</th>
+                                <th>Tên File</th>
+                                <th>Danh Mục</th>
+                                <th>Kích Thước</th>
+                                <th>Lượt Tải</th>
+                                <th>Ngày Tạo</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="files-table-body">
+                            <!-- Files will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Upload Section -->
+            <section id="upload" class="section">
+                <div class="upload-container">
+                    <h2>Tải File Lên</h2>
+                    <form id="upload-form" class="upload-form">
+                        <div class="form-group">
+                            <label for="file-name">Tên File *</label>
+                            <input type="text" id="file-name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="file-description">Mô Tả</label>
+                            <textarea id="file-description" name="description" rows="3"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="file-category">Danh Mục *</label>
+                            <select id="file-category" name="category_id" required>
+                                <option value="">Chọn danh mục</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="file-upload">File *</label>
+                            <div class="file-upload-area" id="file-upload-area">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Kéo thả file vào đây hoặc click để chọn</p>
+                                <input type="file" id="file-upload" name="file" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Icon/Logo File</label>
+                            <div class="icon-selection">
+                                <div class="icon-options">
+                                    <label class="icon-option">
+                                        <input type="radio" name="icon_type" value="default" checked>
+                                        <span class="icon-option-content">
+                                            <i class="fas fa-icons"></i>
+                                            <span>Icon Mặc Định</span>
+                                        </span>
+                                    </label>
+                                    <label class="icon-option">
+                                        <input type="radio" name="icon_type" value="custom">
+                                        <span class="icon-option-content">
+                                            <i class="fas fa-image"></i>
+                                            <span>Upload Icon</span>
+                                        </span>
+                                    </label>
+                                    <label class="icon-option">
+                                        <input type="radio" name="icon_type" value="fontawesome">
+                                        <span class="icon-option-content">
+                                            <i class="fas fa-font-awesome"></i>
+                                            <span>Chọn Font Awesome</span>
+                                        </span>
+                                    </label>
+                                </div>
+                                
+                                <!-- Default Icon Preview -->
+                                <div id="default-icon-preview" class="icon-preview">
+                                    <div class="icon-preview-item">
+                                        <i class="fas fa-file"></i>
+                                        <span>Icon mặc định theo danh mục</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Custom Icon Upload -->
+                                <div id="custom-icon-upload" class="icon-upload-section" style="display: none;">
+                                    <div class="file-upload-area" id="icon-upload-area">
+                                        <i class="fas fa-image"></i>
+                                        <p>Kéo thả icon vào đây hoặc click để chọn</p>
+                                        <input type="file" id="file-icon" name="icon" accept="image/*">
+                                    </div>
+                                    <small>Hỗ trợ: PNG, JPG, GIF, SVG (Tối đa 2MB)</small>
+                                </div>
+                                
+                                <!-- Font Awesome Icon Selector -->
+                                <div id="fontawesome-icon-selector" class="icon-selector" style="display: none;">
+                                    <div class="icon-search">
+                                        <input type="text" id="icon-search" placeholder="Tìm kiếm icon...">
+                                    </div>
+                                    <div class="icon-grid" id="icon-grid">
+                                        <!-- Popular icons will be loaded here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-upload"></i> Tải Lên
+                            </button>
+                            <button type="reset" class="btn btn-secondary">Làm Mới</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Categories Section -->
+            <section id="categories" class="section">
+                <div class="section-header">
+                    <h2>Quản Lý Danh Mục</h2>
+                </div>
+                <div class="categories-grid" id="categories-grid">
+                    <!-- Categories will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="section">
+                <div class="settings-container">
+                    <h2>Cài Đặt Hệ Thống</h2>
+                    <div class="settings-grid">
+                        <div class="setting-card">
+                            <h3>Thông Tin Website</h3>
+                            <div class="form-group">
+                                <label>Tên Website</label>
+                                <input type="text" value="File Download Center">
+                            </div>
+                            <div class="form-group">
+                                <label>Mô Tả</label>
+                                <textarea rows="3">Trung tâm tải file - Ứng dụng và tiện ích</textarea>
+                            </div>
+                        </div>
+                        <div class="setting-card">
+                            <h3>Cài Đặt Upload</h3>
+                            <div class="form-group">
+                                <label>Kích Thước File Tối Đa (MB)</label>
+                                <input type="number" value="100">
+                            </div>
+                            <div class="form-group">
+                                <label>Định Dạng File Cho Phép</label>
+                                <input type="text" value="exe,apk,dmg,zip,rar,7z,pdf,doc,docx">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="upload-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Tải File Lên</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="modal-upload-form">
+                    <div class="form-group">
+                        <label for="modal-file-name">Tên File *</label>
+                        <input type="text" id="modal-file-name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="modal-file-description">Mô Tả</label>
+                        <textarea id="modal-file-description" name="description" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="modal-file-category">Danh Mục *</label>
+                        <select id="modal-file-category" name="category_id" required>
+                            <option value="">Chọn danh mục</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="modal-file-upload">File *</label>
+                        <div class="file-upload-area" id="modal-file-upload-area">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Kéo thả file vào đây hoặc click để chọn</p>
+                            <input type="file" id="modal-file-upload" name="file" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Icon/Logo File</label>
+                        <div class="icon-selection">
+                            <div class="icon-options">
+                                <label class="icon-option">
+                                    <input type="radio" name="modal_icon_type" value="default" checked>
+                                    <span class="icon-option-content">
+                                        <i class="fas fa-icons"></i>
+                                        <span>Icon Mặc Định</span>
+                                    </span>
+                                </label>
+                                <label class="icon-option">
+                                    <input type="radio" name="modal_icon_type" value="custom">
+                                    <span class="icon-option-content">
+                                        <i class="fas fa-image"></i>
+                                        <span>Upload Icon</span>
+                                    </span>
+                                </label>
+                                <label class="icon-option">
+                                    <input type="radio" name="modal_icon_type" value="fontawesome">
+                                    <span class="icon-option-content">
+                                        <i class="fas fa-font-awesome"></i>
+                                        <span>Chọn Font Awesome</span>
+                                    </span>
+                                </label>
+                            </div>
+                            
+                            <!-- Default Icon Preview -->
+                            <div id="modal-default-icon-preview" class="icon-preview">
+                                <div class="icon-preview-item">
+                                    <i class="fas fa-file"></i>
+                                    <span>Icon mặc định theo danh mục</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Custom Icon Upload -->
+                            <div id="modal-custom-icon-upload" class="icon-upload-section" style="display: none;">
+                                <div class="file-upload-area" id="modal-icon-upload-area">
+                                    <i class="fas fa-image"></i>
+                                    <p>Kéo thả icon vào đây hoặc click để chọn</p>
+                                    <input type="file" id="modal-file-icon" name="icon" accept="image/*">
+                                </div>
+                                <small>Hỗ trợ: PNG, JPG, GIF, SVG (Tối đa 2MB)</small>
+                            </div>
+                            
+                            <!-- Font Awesome Icon Selector -->
+                            <div id="modal-fontawesome-icon-selector" class="icon-selector" style="display: none;">
+                                <div class="icon-search">
+                                    <input type="text" id="modal-icon-search" placeholder="Tìm kiếm icon...">
+                                </div>
+                                <div class="icon-grid" id="modal-icon-grid">
+                                    <!-- Popular icons will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-upload"></i> Tải Lên
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeUploadModal()">Hủy</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Chỉnh Sửa File</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-form">
+                    <input type="hidden" id="edit-file-id">
+                    <div class="form-group">
+                        <label for="edit-file-name">Tên File *</label>
+                        <input type="text" id="edit-file-name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit-file-description">Mô Tả</label>
+                        <textarea id="edit-file-description" name="description" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="edit-file-category">Danh Mục *</label>
+                        <select id="edit-file-category" name="category_id" required>
+                            <option value="">Chọn danh mục</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Icon/Logo File</label>
+                        <div class="icon-selection">
+                            <div class="icon-options">
+                                <label class="icon-option">
+                                    <input type="radio" name="edit_icon_type" value="default" checked>
+                                    <span class="icon-option-content">
+                                        <i class="fas fa-icons"></i>
+                                        <span>Icon Mặc Định</span>
+                                    </span>
+                                </label>
+                                <label class="icon-option">
+                                    <input type="radio" name="edit_icon_type" value="custom">
+                                    <span class="icon-option-content">
+                                        <i class="fas fa-image"></i>
+                                        <span>Upload Icon</span>
+                                    </span>
+                                </label>
+                                <label class="icon-option">
+                                    <input type="radio" name="edit_icon_type" value="fontawesome">
+                                    <span class="icon-option-content">
+                                        <i class="fas fa-font-awesome"></i>
+                                        <span>Chọn Font Awesome</span>
+                                    </span>
+                                </label>
+                            </div>
+                            
+                            <!-- Custom Icon Upload for Edit -->
+                            <div id="edit-custom-icon-upload" class="icon-upload-section" style="display: none;">
+                                <div class="file-upload-area" id="edit-icon-upload-area">
+                                    <i class="fas fa-image"></i>
+                                    <p>Kéo thả icon vào đây hoặc click để chọn</p>
+                                    <input type="file" id="edit-file-icon" name="icon" accept="image/*">
+                                </div>
+                                <small>Hỗ trợ: PNG, JPG, GIF, SVG (Tối đa 2MB)</small>
+                            </div>
+                            
+                            <!-- Font Awesome Icon Selector for Edit -->
+                            <div id="edit-fontawesome-icon-selector" class="icon-selector" style="display: none;">
+                                <div class="icon-search">
+                                    <input type="text" id="edit-icon-search" placeholder="Tìm kiếm icon...">
+                                </div>
+                                <div class="icon-grid" id="edit-icon-grid">
+                                    <!-- Popular icons will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Lưu Thay Đổi
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Hủy</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Xác Nhận Xóa</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa file "<span id="delete-file-name"></span>"?</p>
+                <p class="warning">Hành động này không thể hoàn tác!</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" onclick="confirmDelete()">
+                    <i class="fas fa-trash"></i> Xóa
+                </button>
+                <button class="btn btn-secondary" onclick="closeDeleteModal()">Hủy</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <script src="admin.js"></script>
+</body>
+</html> 

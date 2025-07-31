@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tải xuống các ứng dụng và tiện ích cho Android, Windows, macOS và các công cụ hữu ích khác">
+    <meta name="keywords" content="tải app, ứng dụng android, phần mềm windows, ứng dụng macos, tiện ích">
+    <meta name="author" content="File Download Center">
+    <meta name="robots" content="index, follow">
+    <title>Trung Tâm Tải File - Ứng Dụng & Tiện Ích</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="images/logo.png" alt="File Download Center" class="logo-img">
+                    <h1>File Download Center</h1>
+                </div>
+                <nav class="nav">
+                    <a href="#android" class="nav-link">Android</a>
+                    <a href="#windows" class="nav-link">Windows</a>
+                    <a href="#macos" class="nav-link">macOS</a>
+                    <a href="#utilities" class="nav-link">Tiện Ích</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-content">
+                    <h2>Tải Xuống Ứng Dụng & Tiện Ích</h2>
+                    <p>Khám phá và tải xuống các ứng dụng chất lượng cao cho mọi nền tảng</p>
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="search-input" placeholder="Tìm kiếm ứng dụng...">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Android Section -->
+            <section id="android" class="download-section">
+                <div class="section-header">
+                    <h3><i class="fab fa-android"></i> Ứng Dụng Android</h3>
+                    <p>Khám phá các ứng dụng Android tốt nhất</p>
+                </div>
+                <div class="download-grid" id="android-grid">
+                    <!-- Android apps will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Windows Section -->
+            <section id="windows" class="download-section">
+                <div class="section-header">
+                    <h3><i class="fab fa-windows"></i> Phần Mềm Windows</h3>
+                    <p>Phần mềm chất lượng cho hệ điều hành Windows</p>
+                </div>
+                <div class="download-grid" id="windows-grid">
+                    <!-- Windows software will be loaded here -->
+                </div>
+            </section>
+
+            <!-- macOS Section -->
+            <section id="macos" class="download-section">
+                <div class="section-header">
+                    <h3><i class="fab fa-apple"></i> Ứng Dụng macOS</h3>
+                    <p>Ứng dụng chuyên nghiệp cho macOS</p>
+                </div>
+                <div class="download-grid" id="macos-grid">
+                    <!-- macOS apps will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Utilities Section -->
+            <section id="utilities" class="download-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-tools"></i> Tiện Ích & Công Cụ</h3>
+                    <p>Các công cụ hữu ích cho mọi nhu cầu</p>
+                </div>
+                <div class="download-grid" id="utilities-grid">
+                    <!-- Utility tools will be loaded here -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>File Download Center</h4>
+                    <p>Trung tâm tải file uy tín với các ứng dụng và tiện ích chất lượng cao.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Liên Kết</h4>
+                    <ul>
+                        <li><a href="#android">Android Apps</a></li>
+                        <li><a href="#windows">Windows Software</a></li>
+                        <li><a href="#macos">macOS Apps</a></li>
+                        <li><a href="#utilities">Utilities</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Hỗ Trợ</h4>
+                    <ul>
+                        <li><a href="#">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#">Báo cáo lỗi</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 File Download Center. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Download Modal -->
+    <div id="download-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Xác Nhận Tải Xuống</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="download-info">
+                    <div class="download-icon" id="modal-file-icon">
+                        <!-- File icon will be displayed here -->
+                    </div>
+                    <div class="download-details">
+                        <h4 id="modal-file-name">Tên File</h4>
+                        <p id="modal-file-description">Mô tả file</p>
+                        <div class="file-stats">
+                            <span id="modal-file-size">Kích thước</span>
+                            <span id="modal-file-downloads">Lượt tải</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="download-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Hãy đảm bảo bạn tải file từ nguồn đáng tin cậy. Chúng tôi không chịu trách nhiệm về nội dung của các file được tải xuống.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeDownloadModal()">Hủy</button>
+                <button class="btn btn-primary" id="confirm-download-btn">
+                    <i class="fas fa-download"></i> Tải Xuống
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to top button -->
+    <button id="scroll-to-top" class="scroll-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html> 
